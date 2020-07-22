@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +19,16 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h1>お問い合わせありがとうございました。</h1>
+                <p>入力されたメールアドレスに自動返信メールが送信されました。</p>
+                <p><a href="index.php">←お問い合わせに戻る</a></p>
+            </div>
+        </div>
+    </div>
 
-    <h1>お問い合わせありがとうございました。</h1>
-    <a href="index.php">お問い合わせに戻る</a>
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
