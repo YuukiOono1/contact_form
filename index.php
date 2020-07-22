@@ -1,13 +1,13 @@
-<?php require('dbconnect.php'); ?>
-
 <?php
 session_start();
+
+require('dbconnect.php');
 
 if (!empty($_POST)) {
     require('validation.php');
 
     if (empty($error)) {
-        $_SESSION['contact'] = $_POST;
+        $_SESSION['contacts'] = $_POST;
         header('Location: confirm.php');
         exit();
     }
