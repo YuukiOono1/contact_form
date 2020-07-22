@@ -3,27 +3,24 @@ session_start();
 require('dbconnect.php'); 
 
 if (!empty($_POST)) {
-    $statement = $db->prepare('INSERT INTO contact SET id=1, last_name=?, first_name=?,
+    $statement = $db->prepare('INSERT INTO contacts SET last_name=?, first_name=?,
      last_name_kana=?, first_name_kana=?, email=?, post_code=?, telephone=?, content=?, about=?');
     $statement->execute(array(
-        $_SESSION['contact']['last_name'],
-        $_SESSION['contact']['first_name'],
-        $_SESSION['contact']['last_name_kana'],
-        $_SESSION['contact']['first_name_kana'],
-        $_SESSION['contact']['email'],
-        $_SESSION['contact']['post_code'][0] . $_SESSION['contact']['post_code'][1],
-        $_SESSION['contact']['telephone'][0] . $_SESSION['contact']['telephone'][1] . $_SESSION['contact']['telephone'][2],
-        $_SESSION['contact']['content'],
-        $_SESSION['contact']['about'],
+        $_SESSION['contacts']['last_name'],
+        $_SESSION['contacts']['first_name'],
+        $_SESSION['contacts']['last_name_kana'],
+        $_SESSION['contacts']['first_name_kana'],
+        $_SESSION['contacts']['email'],
+        $_SESSION['contacts']['post_code'] = $_SESSION['contacts']['post_code'][0] . $_SESSION['contacts']['post_code'][1],
+        $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone'][0] . 
+            $_SESSION['contacts']['telephone'][1]. $_SESSION['contacts']['telephone'][2],
+        $_SESSION['contacts']['content'],
+        $_SESSION['contacts']['about'],
     ));
 
     header('Location: complete.php');
     exit();
 }
-?>
-
-<?php
-var_dump($_SESSION['contact']['about']);
 ?>
 
 <!DOCTYPE html>
@@ -55,53 +52,54 @@ var_dump($_SESSION['contact']['about']);
                         <tbody>
                             <tr>
                                 <th class="w-50" scope="row">姓</td>
-                                <td><?php echo $_SESSION['contact']['last_name'] ?></td>
+                                <td><?php echo $_SESSION['contacts']['last_name'] ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">名</th>
-                                <td><?php echo $_SESSION['contact']['first_name'] ?></td>
+                                <td><?php echo $_SESSION['contacts']['first_name'] ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">セイ</th>
-                                <td><?php echo $_SESSION['contact']['last_name_kana'] ?></td>
+                                <td><?php echo $_SESSION['contacts']['last_name_kana'] ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">メイ</th>
-                                <td><?php echo $_SESSION['contact']['first_name_kana'] ?></td>
+                                <td><?php echo $_SESSION['contacts']['first_name_kana'] ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">メールアドレス</th>
-                                <td><?php echo $_SESSION['contact']['email'] ?></td>
+                                <td><?php echo $_SESSION['contacts']['email'] ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">郵便番号</th>
                                 <td>
-                                    〒 
-                                    <?php echo $_SESSION['contact']['post_code'][0] ?>
+                                    <i class="fas fa-tenge"></i>
+                                    <?php echo $_SESSION['contacts']['post_code'][0] ?>
                                         - 
-                                    <?php echo $_SESSION['contact']['post_code'][1] ?>
+                                    <?php echo $_SESSION['contacts']['post_code'][1] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">電話番号</th>
                                 <td>
-                                    <?php echo $_SESSION['contact']['telephone'][0] ?>
+                                    <i class="fas fa-phone"></i>
+                                    <?php echo $_SESSION['contacts']['telephone'][0] ?>
                                         - 
-                                    <?php echo $_SESSION['contact']['telephone'][1] ?>
+                                    <?php echo $_SESSION['contacts']['telephone'][1] ?>
                                         - 
-                                    <?php echo $_SESSION['contact']['telephone'][2] ?>
+                                    <?php echo $_SESSION['contacts']['telephone'][2] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">お問い合わせ内容</th>
                                 <td>
-                                    <?php echo $_SESSION['contact']['content'] ?>
+                                    <?php echo $_SESSION['contacts']['content'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">お問い合わせについて</th>
                                 <td>
-                                    <?php echo $_SESSION['contact']['about'] ?>
+                                    <?php echo $_SESSION['contacts']['about'] ?>
                                 </td>
                             </tr>
                         </tbody>
