@@ -18,7 +18,7 @@ if (!empty($_POST)) {
         $_SESSION['contacts']['about'],
     ));
 
-    header('Location: complete.php');
+    header('Location: return_mail.php');
     exit();
 }
 ?>
