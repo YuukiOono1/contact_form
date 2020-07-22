@@ -1,3 +1,35 @@
+<?php
+session_start();
+require('../dbconnect.php'); 
+
+if (!empty($_POST)) {
+    $login = $db->prepare('SELECT * FROM users WHERE email=? AND password=?');
+    $login->execute(array(
+        $_POST['email'],
+        $_POST['password'],
+    ));
+    $user = $login->fetch();
+
+    if ($user) {
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['time'] = time();
+        // ユーザーのクッキーに１週間ログイン情報を保持
+        setcookie('email', $_POST['email'], time()+60*60*24*7);
+    
+        header('Location: index.php');
+        exit();
+    } else {
+        $error['login'] = 'failed';
+    }
+}
+
+if (!empty($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,17 +63,22 @@
 
                         <!--Header-->
                         <div class="text-center">
-                            <h3 class="dark-grey-text mb-5"><strong>管理ログイン</strong></h3>
+                            <h3 class="dark-grey-text mb-5"><strong>ログイン</strong></h3>
+                            <?php if ($error['login'] === 'failed'): ?>
+                                <p class="text-danger">ログインに失敗しました。</p>
+                            <?php endif; ?>
                         </div>
 
                         <form method="POST" action="">
                             <div class="md-form">
-                                <input type="email" id="email" name="email" class="form-control" required value="">
                                 <label for="email">メールアドレス</label>
+                                <input type="email" id="email" name="email" class="form-control" required 
+                                value="<?php echo $_POST['email']; ?>">
                             </div>
                             <div class="md-form">
-                                <input type="password" id="password" name="password" class="form-control" required value="">
                                 <label for="password">パスワード</label>
+                                <input type="password" id="password" name="password" class="form-control" required 
+                                value="<?php echo $_POST['password']; ?>">
                             </div>
                             <button type="submit" class="btn default-color btn-block btn-rounded z-depth-1a"><span class="white-text">ログイン</span></button>
                         </form>
