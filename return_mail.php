@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('basic_auth.php');
 
 // セッション情報
 $last_name = $_SESSION['contacts']['last_name']; // 姓
