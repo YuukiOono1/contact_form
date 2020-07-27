@@ -8,11 +8,15 @@ $first_name = $_SESSION['contacts']['first_name']; // 名
 $last_name_kana = $_SESSION['contacts']['last_name_kana']; // セイ
 $first_name_kana = $_SESSION['contacts']['first_name_kana']; // メイ
 $email = $_SESSION['contacts']['email']; // メール
-$post_code = $_SESSION['contacts']['post_code']; // 郵便番号
+$post_code = $_SESSION['contacts']['post_code']; // 郵便番号 111-1111
+$post_code_first = substr($post_code, 0, 3);
+$post_code_last = substr($post_code, 3, 4);
 $telephone = $_SESSION['contacts']['telephone']; // 電話番号
+$telephone_first = substr($telephone, 0, 3);
+$telephone_middle = substr($telephone, 3, 4);
+$telephone_last = substr($telephone, 7, 4);
 $content = $_SESSION['contacts']['content']; // 本文
 $about = $_SESSION['contacts']['about']; // 件名
-
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -30,8 +34,8 @@ try{
     $manager_mail->Body = '氏名: ' . $last_name . ' ' . $first_name . "\n" . // 本文
         'フリガナ: ' . $last_name_kana . ' ' . $first_name_kana . "\n" .
         'メールアドレス: ' . $email . "\n" .
-        '郵便番号: ' . $post_code . "\n" .
-        '電話番号: ' . $telephone . "\n" . 
+        '郵便番号: ' . $post_code_first . '-' . $post_code_last . "\n" .
+        '電話番号: ' . $telephone_first . '-' . $telephone_middle . '-' . $telephone_last . "\n" . 
         'お問い合わせ内容: ' . $content . "\n" .
         'お問い合わせについて: ' . $about . "\n";
 
@@ -52,8 +56,8 @@ try{
     $user_mail->Body = '氏名: ' . $last_name . ' ' . $first_name . "\n" . // 本文
         'フリガナ: ' . $last_name_kana . ' ' . $first_name_kana . "\n" .
         'メールアドレス: ' . $email . "\n" .
-        '郵便番号: ' . $post_code . "\n" .
-        '電話番号: ' . $telephone . "\n" . 
+        '郵便番号: ' . $post_code_first . '-' . $post_code_last . "\n" .
+        '電話番号: ' . $telephone_first . '-' . $telephone_middle . '-' . $telephone_last . "\n" . 
         'お問い合わせ内容: ' . $content . "\n" .
         'お問い合わせについて: ' . $about . "\n";
     
