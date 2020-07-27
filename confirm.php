@@ -52,54 +52,54 @@ if (!empty($_POST)) {
                         <tbody>
                             <tr>
                                 <th class="w-50" scope="row">姓</td>
-                                <td><?php echo $_SESSION['contacts']['last_name'] ?></td>
+                                <td><?php echo htmlspecialchars($_SESSION['contacts']['last_name'], ENT_QUOTES); ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">名</th>
-                                <td><?php echo $_SESSION['contacts']['first_name'] ?></td>
+                                <td><?php echo htmlspecialchars($_SESSION['contacts']['first_name'], ENT_QUOTES); ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">セイ</th>
-                                <td><?php echo $_SESSION['contacts']['last_name_kana'] ?></td>
+                                <td><?php echo htmlspecialchars($_SESSION['contacts']['last_name_kana'], ENT_QUOTES); ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">メイ</th>
-                                <td><?php echo $_SESSION['contacts']['first_name_kana'] ?></td>
+                                <td><?php echo htmlspecialchars($_SESSION['contacts']['first_name_kana'], ENT_QUOTES); ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">メールアドレス</th>
-                                <td><?php echo $_SESSION['contacts']['email'] ?></td>
+                                <td><?php echo htmlspecialchars($_SESSION['contacts']['email'], ENT_QUOTES); ?></td>
                             </tr>
                             <tr>
                                 <th class="w-50">郵便番号</th>
                                 <td>
                                     <i class="fas fa-tenge"></i>
-                                    <?php echo $_SESSION['contacts']['post_code'][0] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code'][0], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo $_SESSION['contacts']['post_code'][1] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code'][1], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">電話番号</th>
                                 <td>
                                     <i class="fas fa-phone"></i>
-                                    <?php echo $_SESSION['contacts']['telephone'][0] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][0], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo $_SESSION['contacts']['telephone'][1] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][1], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo $_SESSION['contacts']['telephone'][2] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][2], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">お問い合わせ内容</th>
                                 <td>
-                                    <?php echo $_SESSION['contacts']['content'] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['content'], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">お問い合わせについて</th>
                                 <td>
-                                    <?php echo $_SESSION['contacts']['about'] ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['about'], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                         </tbody>
