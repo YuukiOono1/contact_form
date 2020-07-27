@@ -69,6 +69,8 @@ if ($_SESSION['email']) {
                             <th scope="col">お問い合わせについて</th>
                             <th scope="col">お問い合わせ内容</th>
                             <th scope="col">詳細を見る</th>
+                            <th scope="col">返答する</th>
+                            <th scope="col">返答日</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +82,8 @@ if ($_SESSION['email']) {
                             <td><?php echo $row['about']; ?></td>
                             <td><?php echo mb_substr($row['content'], 0, 10); ?>・・・</td>
                             <td><a href="show.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">詳細</td>
+                            <td><a href="reply.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">返答</td>
+                            <td></td>
                         </tr>
                         <?php }?>
                     </tbody>
