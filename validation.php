@@ -17,11 +17,11 @@ if (empty($_POST['first_name_kana'])) {
 if (empty($_POST['email'])) {
     $error['email'] = 'blank';
 }
-if (empty($_POST['post_code'])) {
+if (empty($_POST['post_code[]'])) {
     $error['post_code'] = 'blank';
 }
 
-if (empty($_POST['telephone'])) {
+if (empty($_POST['telephone[]'])) {
     $error['telephone'] = 'blank';
 }
 
@@ -42,7 +42,7 @@ if (strlen($_POST['last_name_kana']) > 20) {
 if (strlen($_POST['first_name_kana']) > 20) {
     $error['first_name_kana'] = 'length';
 }
-if (strlen($_POST['post_code']) > 9) {
+if (strlen($_POST['post_code[]']) > 9) {
     $error['post_code'] = 'length';
 }
 
