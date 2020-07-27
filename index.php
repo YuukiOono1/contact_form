@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('basic_auth.php');
 require('dbconnect.php');
 
 if (!empty($_POST)) {
@@ -64,7 +65,7 @@ if (!empty($_POST)) {
                                 <div class="form-group col-sm-6">
                                     <label for="first_name">名</label>
                                     <input type="text" name="first_name" id="first_name" class="form-control">
-                                    <?php if($error['first_name'] === 'blank'): ?>
+                                    <?php if ($error['first_name'] === 'blank'): ?>
                                         <p class="text-danger">名を入力してください。</p>
                                     <?php endif; ?>
                                     <?php if ($error['first_name'] === 'length'): ?>
@@ -76,7 +77,7 @@ if (!empty($_POST)) {
                                 <div class="form-group col-sm-6">
                                     <label for="last_name_kana">セイ</label>
                                     <input type="text" name="last_name_kana" id="last_name_kana" class="form-control">
-                                    <?php if($error['last_name_kana'] === 'blank'): ?>
+                                    <?php if ($error['last_name_kana'] === 'blank'): ?>
                                         <p class="text-danger">セイを入力してください。</p>
                                     <?php endif; ?>
                                     <?php if ($error['last_name_kana'] === 'length'): ?>
@@ -86,7 +87,7 @@ if (!empty($_POST)) {
                                 <div class="form-group col-sm-6">
                                     <label for="first_name_kana">メイ</label>
                                     <input type="text" name="first_name_kana" id="first_name_kana" class="form-control">
-                                    <?php if($error['first_name_kana'] === 'blank'): ?>
+                                    <?php if ($error['first_name_kana'] === 'blank'): ?>
                                         <p class="text-danger">メイを入力してください。</p>
                                     <?php endif; ?>
                                     <?php if ($error['first_name_kana'] === 'length'): ?>
@@ -97,7 +98,7 @@ if (!empty($_POST)) {
                             <div class="form-group">
                                 <label>メールアドレス</label>
                                 <input type="email" id="email" name="email" class="form-control" size="5">
-                                <?php if($error['email'] === 'blank'): ?>
+                                <?php if ($error['email'] === 'blank'): ?>
                                     <p class="text-danger">メールアドレスを入力してください。</p>
                                 <?php endif; ?>
                             </div>
@@ -109,7 +110,7 @@ if (!empty($_POST)) {
                                     <input type="text" name="post_code[]" id="post_code[]" class="form-control ml-1" size="5">
                                 </div>
                             </div>
-                            <?php if($error['post_code'] === 'blank'): ?>
+                            <?php if ($error['post_code'] === 'blank'): ?>
                                 <p class="text-danger">郵便番号を入力してください。</p>
                             <?php endif; ?>
                             <?php if ($error['post_code'] === 'length'): ?>
@@ -125,8 +126,14 @@ if (!empty($_POST)) {
                                     <input type="tel" name="telephone[]" id="telephone[]" class="form-control ml-1" size="5">
                                 </div> 
                             </div>
-                            <?php if($error['telephone'] === 'blank'): ?>
+                            <?php if ($error['telephone'] === 'blank'): ?>
                                 <p class="text-danger">電話番号を入力してください。</p>
+                            <?php endif; ?>
+                            <?php if ($error['telephone'] === 'length'): ?>
+                                <p class="text-danger">入力数が長すぎます。</p>
+                            <?php endif; ?>
+                            <?php if ($error['telephone'] === 'match'): ?>
+                                <p class="text-danger">数値で入力してください。</p>
                             <?php endif; ?>
                             <div class="form-group">
                                 <label for="content">お問い合わせ内容</label>
