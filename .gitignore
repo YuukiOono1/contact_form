@@ -1,2 +1,5 @@
 dbconnect.php
 vendor
+manager_mail_server.php
+user_mail_server.php
+basic_auth.php
