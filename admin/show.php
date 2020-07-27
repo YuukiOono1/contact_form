@@ -1,10 +1,17 @@
 <?php
+session_start();
 require('../dbconnect.php');
 
-$id = $_REQUEST['id'];
-$statement = $db->prepare('SELECT * FROM contacts WHERE id=?');
-$statement->execute(array($id));
-$sta = $statement->fetch();
+// ログイン済みか判定
+if ($_SESSION['email']) {
+    $id = $_REQUEST['id'];
+    $statement = $db->prepare('SELECT * FROM contacts WHERE id=?');
+    $statement->execute(array($id));
+    $sta = $statement->fetch();
+} else {
+    // ログインしていなければログインページへリダイレクト
+    header('Location: login.php');
+}
 ?>
 
 <!DOCTYPE html>
