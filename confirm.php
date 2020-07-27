@@ -12,8 +12,8 @@ if (!empty($_POST)) {
         $_SESSION['contacts']['first_name_kana'],
         $_SESSION['contacts']['email'],
         $_SESSION['contacts']['post_code'] = $_SESSION['contacts']['post_code'][0] . $_SESSION['contacts']['post_code'][1],
-        $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone'][0] . 
-            $_SESSION['contacts']['telephone'][1]. $_SESSION['contacts']['telephone'][2],
+        $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone'][0] . $_SESSION['contacts']['telephone'][1]
+                                                    . $_SESSION['contacts']['telephone'][2],
         $_SESSION['contacts']['content'],
         $_SESSION['contacts']['about'],
     ));
