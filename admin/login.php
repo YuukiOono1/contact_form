@@ -11,7 +11,7 @@ if (!empty($_POST)) {
     $user = $login->fetch();
 
     if ($user) {
-        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
         $_SESSION['time'] = time();
         // ユーザーのクッキーに１週間ログイン情報を保持
         setcookie('email', $_POST['email'], time()+60*60*24*7);
