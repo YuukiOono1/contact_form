@@ -116,6 +116,9 @@ if (!empty($_POST)) {
                             <?php if ($error['post_code'] === 'length'): ?>
                                 <p class="text-danger">入力数が長すぎます。</p>
                             <?php endif; ?>
+                            <?php if ($error['post_code'] === 'match'): ?>
+                                <p class="text-danger">数値で入力してください。</p>
+                            <?php endif; ?>
                             <label>電話番号</label>
                             <div class="form-row">
                                 <div class="form-group form-inline col-sm-10">
