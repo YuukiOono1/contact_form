@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('basic_auth.php');
 ?>
 
 <!DOCTYPE html>
