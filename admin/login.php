@@ -6,7 +6,7 @@ if (!empty($_POST)) {
     $login = $db->prepare('SELECT * FROM users WHERE email=? AND password=?');
     $login->execute(array(
         $_POST['email'],
-        $_POST['password'],
+        sha1($_POST['password']),
     ));
     $user = $login->fetch();
 
