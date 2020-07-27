@@ -1,7 +1,11 @@
 <?php
+session_start();
 require('../dbconnect.php');
 
-    $statement = $db->query('SELECT * from contacts ORDER BY id DESC');
+// ログイン済みか判定
+if ($_SESSION['email']) {
+    // 記事一覧をDBから取得
+    $statement = $db->query('SELECT * from contacts');
     $sta = $statement->fetchall();
 
     // csvダウンロード
@@ -27,6 +31,10 @@ require('../dbconnect.php');
         echo $csv_data;
         exit;
     }
+} else {
+    // ログインしていなければログインページへリダイレクト
+    header('Location: login.php');
+}
 ?>
 
 <!DOCTYPE html>
