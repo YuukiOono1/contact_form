@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost:8889
--- 生成日時: 2020 年 7 月 22 日 01:35
+-- 生成日時: 2020 年 7 月 27 日 02:43
 -- サーバのバージョン： 5.7.26
 -- PHP のバージョン: 7.4.2
 
@@ -45,12 +45,13 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `last_name`, `first_name`, `last_name_kana`, `first_name_kana`, `email`, `post_code`, `telephone`, `content`, `about`, `created_at`) VALUES
-(1, '山田', '太郎', 'ヤマダ', 'タロウ', 'yamada@example.com', '1111111', '11111111111', 'テストテストテスト', '会社について', '2020-07-22 00:28:38'),
-(2, '木村', '花子', 'キムラ', 'ハナコ', 'kimura@example.com', '2222222\r\n', '33333333333', 'テストテストテスト', '購入について', '2020-07-22 00:28:51'),
-(3, '鈴木', '一郎', 'スズキ', 'イチロウ', 'suzuki@example.com', '2222222\r\n', '44433333333', 'ああああああああああああああああ', '商品について', '2020-07-22 00:29:03'),
-(4, '高橋', '太郎', 'タカハシ', 'タロウ', 'takahashi@example.com', '8789779\r\n', '11111111111', 'いいいいいいいいいいいいいいいい', '支払いについて', '2020-07-22 00:29:12'),
-(5, '山田', '花', 'ヤマダ', 'ハナ', 'yamada@example.com', '3334455\r\n', '45323422342', 'あああああ', 'その他', '2020-07-22 00:29:21'),
-(6, '木村', '太郎', 'ヤマダ', 'タロウ', 'tarou@example.com', '9875555', '23424323542', 'おおおおおおおおおお', '支払いについて', '2020-07-22 00:37:50');
+(1, '山田', '太郎', 'yamada', 'tarou', 'yamada@gmail.com', '1111111', '11111111111', 'テスト', '会社について', '2020-07-27 00:37:25'),
+(2, '田中', '太郎', 'tanaka', 'tarou', 'tanaka@gmail.com', '222222', '22222222222', 'テストテストテスト', '購入について', '2020-07-27 00:38:29'),
+(3, '木村', '花子', 'キムラ', 'ハナコ', 'kimura@gmail.com', '1111111', '22222222222', 'aaaaaaaaaa', '商品について', '2020-07-27 00:39:16'),
+(4, '山田', '花子', 'yamada', 'hanako', 'hanako@gmail.com', '3333333', '33333333333', 'テストテスト', '支払いについて', '2020-07-27 00:40:02'),
+(5, '遠藤', '太郎', 'endou', 'tarou', 'endou@gmail.com', '2222222', '34334242342', 'あああああああ', 'その他', '2020-07-27 00:40:51'),
+(6, '鈴木', '一郎', 'suzuki', 'ichiro', 'suzuki@gmail.com', '1231234', '23212341234', 'test', 'その他', '2020-07-27 02:15:16'),
+(7, '高橋', '太郎', 'takahashi', 'tarou', 'takahashi@example.com', '1232322', '12312342345', 'test', '会社について', '2020-07-27 02:31:33');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -70,7 +71,7 @@ ALTER TABLE `contacts`
 -- テーブルのAUTO_INCREMENT `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
