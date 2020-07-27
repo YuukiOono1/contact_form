@@ -5,9 +5,14 @@ require('basic_auth.php');
 // セッション情報
 $last_name = $_SESSION['contacts']['last_name']; // 姓
 $first_name = $_SESSION['contacts']['first_name']; // 名
+$last_name_kana = $_SESSION['contacts']['last_name_kana']; // セイ
+$first_name_kana = $_SESSION['contacts']['first_name_kana']; // メイ
 $email = $_SESSION['contacts']['email']; // メール
+$post_code = $_SESSION['contacts']['post_code']; // 郵便番号
+$telephone = $_SESSION['contacts']['telephone']; // 電話番号
 $content = $_SESSION['contacts']['content']; // 本文
 $about = $_SESSION['contacts']['about']; // 件名
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -23,7 +28,13 @@ try{
     $manager_mail->CharSet = 'UTF-8'; 
     $manager_mail->Subject = $about; // 件名
     $manager_mail->Body = '氏名: ' . $last_name . ' ' . $first_name . "\n" . // 本文
-        'お問い合わせ内容: ' . $content;
+        'フリガナ: ' . $last_name_kana . ' ' . $first_name_kana . "\n" .
+        'メールアドレス: ' . $email . "\n" .
+        '郵便番号: ' . $post_code . "\n" .
+        '電話番号: ' . $telephone . "\n" . 
+        'お問い合わせ内容: ' . $content . "\n" .
+        'お問い合わせについて: ' . $about . "\n";
+
 
     if ($manager_mail) {
         $manager_flag = '○';
@@ -38,7 +49,13 @@ try{
     $user_mail->addAddress($email); // to
     $user_mail->CharSet = 'UTF-8'; 
     $user_mail->Subject = 'お問い合わせを承りました'; // 件名
-    $user_mail->Body = 'お問い合わせ内容: ' . $content; // 本文
+    $user_mail->Body = '氏名: ' . $last_name . ' ' . $first_name . "\n" . // 本文
+        'フリガナ: ' . $last_name_kana . ' ' . $first_name_kana . "\n" .
+        'メールアドレス: ' . $email . "\n" .
+        '郵便番号: ' . $post_code . "\n" .
+        '電話番号: ' . $telephone . "\n" . 
+        'お問い合わせ内容: ' . $content . "\n" .
+        'お問い合わせについて: ' . $about . "\n";
     
     if ($user_mail) {
         $user_flag = '○';
