@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require('dbconnect.php');
 
 if (!empty($_POST)) {
@@ -12,7 +11,6 @@ if (!empty($_POST)) {
         exit();
     }
 }
-
 ?>
 
 <!DOCTYPE html>
