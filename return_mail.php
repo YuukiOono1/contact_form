@@ -13,17 +13,10 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-
 try{
-    // 管理者メール
+    // 管理者宛メール
     $manager_mail = new PHPMailer(true);
-    $manager_mail->isSMTP();
-    $manager_mail->Host = 'smtp.mailtrap.io';
-    $manager_mail->SMTPAuth = true;
-    $manager_mail->Username = 'a149f0681d629b'; 
-    $manager_mail->Password = '2d8da727f6857f'; 
-    $manager_mail->SMTPSecure = 'tls';
-    $manager_mail->Port = 2525;    
+    require('manager_mail_server.php'); // サーバー設定
     $manager_mail->setFrom($email); // from
     $manager_mail->addAddress('admin@example.com'); // to
     $manager_mail->CharSet = 'UTF-8'; 
@@ -37,15 +30,9 @@ try{
         $manager_flag = '×';
     }
 
-    //　ユーザーメール
+    //　ユーザー宛メール
     $user_mail = new PHPMailer(true);
-    $user_mail->isSMTP();
-    $user_mail->Host = 'smtp.mailtrap.io';
-    $user_mail->SMTPAuth = true;
-    $user_mail->Username = 'a149f0681d629b'; 
-    $user_mail->Password = '2d8da727f6857f'; 
-    $user_mail->SMTPSecure = 'tls';
-    $user_mail->Port = 2525;    
+    require('user_mail_server.php'); // サーバー設定
     $user_mail->setFrom('admin@example.com'); // from
     $user_mail->addAddress($email); // to
     $user_mail->CharSet = 'UTF-8'; 
