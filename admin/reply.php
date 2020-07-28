@@ -11,6 +11,7 @@ if ($_SESSION['email']) {
     // 送信処理
     if (!empty($_POST)) {
         $_SESSION['reply'] = $_POST;
+        $_SESSION['reply']['id'] = $id;
         header('Location: confirm.php');
         exit();
     }
