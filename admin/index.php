@@ -13,7 +13,6 @@ if ($_SESSION['email']) {
     // DBから問い合わせの全件を取得
     $counts = $db->query('SELECT count(*) As cnt from contacts');
     $cnt = $counts->fetch();
-    //　取得件数を切り上げ
     $maxPage = ceil($cnt['cnt'] / 5);
     // ページが２より大きい場合は２
     $page = min($page, $maxPage);
@@ -124,11 +123,11 @@ if ($_SESSION['email']) {
             <nav aria-label="Page navigation example">
                 <ul class="pagination pg-blue">
                     <?php if ($page > 1): ?>
-                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page - 1); ?>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page - 1); ?>">前へ</a></li>
                     <?php endif; ?>
                     <li class="page-item"><a class="page-link">1</a></li>
                     <?php if ($page < $maxPage): ?>
-                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page + 1); ?>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page + 1); ?>">次へ</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
