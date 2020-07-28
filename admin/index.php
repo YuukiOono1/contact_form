@@ -4,8 +4,26 @@ require('../dbconnect.php');
 
 // ログイン済みか判定
 if ($_SESSION['email']) {
+    $page = $_REQUEST['page'];
+    if ($page == '') {
+        $page = 1;
+    }
+    // ページが1より小さい場合は1
+    $page = max($page, 1);
+    // DBから問い合わせの全件を取得
+    $counts = $db->query('SELECT count(*) As cnt from contacts');
+    $cnt = $counts->fetch();
+    //　取得件数を切り上げ
+    $maxPage = ceil($cnt['cnt'] / 5);
+    // ページが２より大きい場合は２
+    $page = min($page, $maxPage);
+
+    $start = ($page - 1) * 5;
+
     // 記事一覧をDBから取得
-    $statement = $db->query('SELECT contacts.*, replys.reply_at from contacts LEFT OUTER JOIN replys ON contacts.id = replys.reply_contacts_id ORDER BY id');
+    $statement = $db->prepare('SELECT contacts.*, replys.reply_at from contacts LEFT OUTER JOIN replys ON contacts.id = replys.reply_contacts_id ORDER BY id LIMIT ?, 5');
+    $statement->bindParam(1, $start, PDO::PARAM_INT);
+    $statement->execute();
     $sta = $statement->fetchall();
     
     // csvダウンロード
@@ -103,6 +121,17 @@ if ($_SESSION['email']) {
                     </tbody>
                 </table>
             </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pg-blue">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page - 1); ?>">Previous</a></li>
+                    <?php endif; ?>
+                    <li class="page-item"><a class="page-link">1</a></li>
+                    <?php if ($page < $maxPage): ?>
+                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo($page + 1); ?>">Next</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
         </div>
     </div>
 
