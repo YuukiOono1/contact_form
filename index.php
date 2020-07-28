@@ -105,9 +105,10 @@ if (!empty($_POST)) {
                             <label>郵便番号</label>
                             <div class="form-row">
                                 <div class="form-group form-inline col-sm-6">
-                                    <input type="text" name="post_code[]" id="post_code[]" class="form-control mr-1" size="5">
+                                    <input type="text" name="post_code_first" id="post_code_first" class="form-control mr-1" size="5">
                                         ー
-                                    <input type="text" name="post_code[]" id="post_code[]" class="form-control ml-1" size="5">
+                                    <input type="text" name="post_code_last" id="post_code_last" class="form-control ml-1" size="5"
+                                        onKeyUp="AjaxZip3.zip2addr('post_code_first','post_code_last','address','address');">
                                 </div>
                             </div>
                             <?php if ($error['post_code'] === 'blank'): ?>
@@ -119,14 +120,18 @@ if (!empty($_POST)) {
                             <?php if ($error['post_code'] === 'match'): ?>
                                 <p class="text-danger">数値で入力してください。</p>
                             <?php endif; ?>
+                            <label>都道府県＋以降の住所</label>
+                            <div class="form-group form-inline">
+                                <input type="text" id="address" name="address" class="form-control" size="30">
+                            </div>
                             <label>電話番号</label>
                             <div class="form-row">
                                 <div class="form-group form-inline col-sm-10">
-                                    <input type="tel" name="telephone[]" id="telephone[]" class="form-control mr-1" size="5">
+                                    <input type="tel" name="telephone_first" id="telephone_first" class="form-control mr-1" size="5">
                                         ー
-                                    <input type="tel" name="telephone[]" id="telephone[]" class="form-control ml-1 mr-1" size="5">
+                                    <input type="tel" name="telephone_middle" id="telephone_middle" class="form-control ml-1 mr-1" size="5">
                                         ー
-                                    <input type="tel" name="telephone[]" id="telephone[]" class="form-control ml-1" size="5">
+                                    <input type="tel" name="telephone_last" id="telephone_last" class="form-control ml-1" size="5">
                                 </div> 
                             </div>
                             <?php if ($error['telephone'] === 'blank'): ?>
@@ -180,6 +185,9 @@ if (!empty($_POST)) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
+    <!-- ajaxzip3 -->
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
 </body>
 
 </html>
