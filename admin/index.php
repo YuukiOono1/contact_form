@@ -5,9 +5,9 @@ require('../dbconnect.php');
 // ログイン済みか判定
 if ($_SESSION['email']) {
     // 記事一覧をDBから取得
-    $statement = $db->query('SELECT * from contacts');
+    $statement = $db->query('SELECT contacts.*, replys.reply_at from contacts LEFT OUTER JOIN replys ON contacts.id = replys.reply_contacts_id ORDER BY id');
     $sta = $statement->fetchall();
-
+    
     // csvダウンロード
     if (isset($_POST['csv'])) {
         header('Content-Type: application/octet-stream');
@@ -75,17 +75,31 @@ if ($_SESSION['email']) {
                     </thead>
                     <tbody>
                         <?php $count=1; ?>
-                        <?php foreach($sta as $row) {?>
-                        <tr>
-                            <th scope="row"><?php echo $count++; ?></th>
-                            <td><?php echo $row['last_name']. ' ' .$row['first_name']; ?></td>
-                            <td><?php echo $row['about']; ?></td>
-                            <td><?php echo mb_substr($row['content'], 0, 10); ?>・・・</td>
-                            <td><a href="show.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">詳細</td>
-                            <td><a href="reply.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">返答</td>
-                            <td></td>
-                        </tr>
-                        <?php }?>
+                        <?php foreach($sta as $row) { ?>
+                            <tr>
+                                <th scope="row"><?php echo $count++; ?></th>
+                                <td>
+                                    <?php echo $row['last_name']. ' ' .$row['first_name']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['about']; ?>
+                                </td>
+                                <td>
+                                    <?php echo mb_substr($row['content'], 0, 10); ?>・・・
+                                </td>
+                                <td>
+                                    <a href="show.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">詳細
+                                </td>
+                                <td>
+                                    <a href="reply.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">返答
+                                </td>
+                                <td>
+                                    <?php if (!empty($row['reply_at'])): ?>
+                                        <p><?php echo $row['reply_at']; ?></p>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
