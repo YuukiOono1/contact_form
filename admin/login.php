@@ -15,7 +15,7 @@ if (!empty($_POST)) {
         $_SESSION['time'] = time();
         // ユーザーのクッキーに１週間ログイン情報を保持
         setcookie('email', $_POST['email'], time()+60*60*24*7);
-    
+        
         header('Location: index.php');
         exit();
     } else {
