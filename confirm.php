@@ -2,23 +2,23 @@
 session_start();
 require('basic_auth.php');
 require('dbconnect.php'); 
-
+var_dump($_SESSION['contacts']);
 if (!empty($_POST)) {
     $statement = $db->prepare('INSERT INTO contacts SET last_name=?, first_name=?,
-     last_name_kana=?, first_name_kana=?, email=?, post_code=?, telephone=?, content=?, about=?');
+     last_name_kana=?, first_name_kana=?, email=?, post_code=?, address=?, telephone=?, content=?, about=?');
     $statement->execute(array(
         $_SESSION['contacts']['last_name'],
         $_SESSION['contacts']['first_name'],
         $_SESSION['contacts']['last_name_kana'],
         $_SESSION['contacts']['first_name_kana'],
         $_SESSION['contacts']['email'],
-        $_SESSION['contacts']['post_code'] = $_SESSION['contacts']['post_code'][0] . $_SESSION['contacts']['post_code'][1],
-        $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone'][0] . $_SESSION['contacts']['telephone'][1]
-                                                    . $_SESSION['contacts']['telephone'][2],
+        $_SESSION['contacts']['post_code'] = $_SESSION['contacts']['post_code_first'] . $_SESSION['contacts']['post_code_last'],
+        $_SESSION['contacts']['address'],
+        $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone_first'] . $_SESSION['contacts']['telephone_middle']
+                                                . $_SESSION['contacts']['telephone_last'],
         $_SESSION['contacts']['content'],
         $_SESSION['contacts']['about'],
     ));
-
     header('Location: return_mail.php');
     exit();
 }
@@ -75,20 +75,20 @@ if (!empty($_POST)) {
                                 <th class="w-50">郵便番号</th>
                                 <td>
                                     <i class="fas fa-tenge"></i>
-                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code'][0], ENT_QUOTES); ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code_first'], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code'][1], ENT_QUOTES); ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['post_code_last'], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="w-50">電話番号</th>
                                 <td>
                                     <i class="fas fa-phone"></i>
-                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][0], ENT_QUOTES); ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone_first'], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][1], ENT_QUOTES); ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone_middle'], ENT_QUOTES); ?>
                                         - 
-                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone'][2], ENT_QUOTES); ?>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['telephone_last'], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
