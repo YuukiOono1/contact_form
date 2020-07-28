@@ -1,16 +1,16 @@
 <?php
 session_start();
 require('../dbconnect.php');
-
 if (!empty($_POST)) {
-    $statement = $db->prepare('INSERT INTO replys SET email=?, subject=?, content=?');
+    $statement = $db->prepare('INSERT INTO replys SET email=?, subject=?, content=?, reply_contacts_id=?, reply_at=NOW()');
     $statement->execute(array(
         $_SESSION['reply']['email'],
         $_SESSION['reply']['subject'],
         $_SESSION['reply']['content'],
+        $_SESSION['reply']['id'],
     ));
 
-    header('Location: index.php');
+    header('Location: reply_mail.php');
     exit();
 }
 ?>
@@ -34,7 +34,6 @@ if (!empty($_POST)) {
 <body>
 
     <div class="container">
-
         <div class="card mt-4">
             <div class="card-body">
                 <form method="POST" action="">
