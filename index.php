@@ -5,9 +5,19 @@ require('dbconnect.php');
 
 if (!empty($_POST)) {
     require('validation.php');
+    // name->元のファイル名 tmp_name->サーバーに一時保存されたファイル名 error->エラー内容 type->ファイルタイプ size->ファイルサイズ
+    $image = date('YmdHis') . $_FILES['image']['name'];
+    if (!empty($image)) {
+        $extension = substr($image, -3);
+        if ($extension != 'jpg' && $extension != 'gif' && $extension != 'png' && $extension != 'csv') {
+            $error['image'] = 'type';
+        }
+    }
 
     if (empty($error)) {
+        move_uploaded_file($_FILES['image']['tmp_name'], './images/' . $image);
         $_SESSION['contacts'] = $_POST;
+        $_SESSION['contacts']['image'] = $image;
         header('Location: confirm.php');
         exit();
     }
@@ -31,7 +41,6 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-
     <section class="form-gradient">
 
         <!-- Grid row -->
@@ -50,7 +59,7 @@ if (!empty($_POST)) {
                             <h3 class="dark-grey-text mb-5"><strong>お問い合わせ</strong></h3>
                         </div>
 
-                        <form method="post" action="">
+                        <form method="post" action="" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <label for="last_name">姓</label>
@@ -124,6 +133,9 @@ if (!empty($_POST)) {
                             <div class="form-group form-inline">
                                 <input type="text" id="address" name="address" class="form-control" size="30">
                             </div>
+                            <?php if ($error['address'] === 'blank'): ?>
+                                <p class="text-danger">住所を入力してください。</p>
+                            <?php endif; ?>
                             <label>電話番号</label>
                             <div class="form-row">
                                 <div class="form-group form-inline col-sm-10">
@@ -151,6 +163,12 @@ if (!empty($_POST)) {
                                 <?php endif; ?>
                                 <?php if ($error['content'] === 'length'): ?>
                                     <p class="text-danger">入力数が長すぎます。</p>
+                                <?php endif; ?>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="image" id="image">
+                                <?php if ($error['image'] === 'type'): ?>
+                                    <p class="text-danger">jpg、gif、png以外のファイルは選択できません</p>
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
@@ -187,7 +205,6 @@ if (!empty($_POST)) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
     <!-- ajaxzip3 -->
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-
 </body>
 
 </html>
