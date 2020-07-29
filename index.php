@@ -2,12 +2,19 @@
 session_start();
 require('basic_auth.php');
 require('dbconnect.php');
+define('MB', 1048576);
 
 if (!empty($_POST)) {
     require('validation.php');
     // name->元のファイル名 tmp_name->サーバーに一時保存されたファイル名 error->エラー内容 type->ファイルタイプ size->ファイルサイズ
+    $size = $_FILES['image']['size'];
+    if ($size > 2*MB) {
+        $error['image'] = 'size';
+    }
+
     $image = date('YmdHis') . $_FILES['image']['name'];
     if (!empty($image)) {
+        // ファイル拡張子
         $extension = substr($image, -3);
         if ($extension != 'jpg' && $extension != 'gif' && $extension != 'png' && $extension != 'csv') {
             $error['image'] = 'type';
@@ -169,6 +176,9 @@ if (!empty($_POST)) {
                                 <input type="file" name="image" id="image">
                                 <?php if ($error['image'] === 'type'): ?>
                                     <p class="text-danger">jpg、gif、png以外のファイルは選択できません</p>
+                                <?php endif; ?>
+                                <?php if ($error['image'] === 'size'): ?>
+                                    <p class="text-danger">ファイルサイズが大きすぎます。</p>
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
