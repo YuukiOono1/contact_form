@@ -24,6 +24,10 @@ if (empty($_POST['post_code_last'])) {
     $error['post_code'] = 'blank';
 }
 
+if (empty($_POST['address'])) {
+    $error['address'] = 'blank';
+}
+
 if (empty($_POST['telephone_first'])) {
     $error['telephone'] = 'blank';
 }
