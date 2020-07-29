@@ -5,7 +5,7 @@ require('dbconnect.php');
 var_dump($_SESSION['contacts']);
 if (!empty($_POST)) {
     $statement = $db->prepare('INSERT INTO contacts SET last_name=?, first_name=?,
-     last_name_kana=?, first_name_kana=?, email=?, post_code=?, address=?, telephone=?, content=?, about=?');
+     last_name_kana=?, first_name_kana=?, email=?, post_code=?, address=?, telephone=?, content=?, file=?, about=?');
     $statement->execute(array(
         $_SESSION['contacts']['last_name'],
         $_SESSION['contacts']['first_name'],
@@ -17,6 +17,7 @@ if (!empty($_POST)) {
         $_SESSION['contacts']['telephone'] = $_SESSION['contacts']['telephone_first'] . $_SESSION['contacts']['telephone_middle']
                                                 . $_SESSION['contacts']['telephone_last'],
         $_SESSION['contacts']['content'],
+        $_SESSION['contacts']['image'],
         $_SESSION['contacts']['about'],
     ));
     header('Location: return_mail.php');
@@ -95,6 +96,12 @@ if (!empty($_POST)) {
                                 <th class="w-50">お問い合わせ内容</th>
                                 <td>
                                     <?php echo htmlspecialchars($_SESSION['contacts']['content'], ENT_QUOTES); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-50">ファイル</th>
+                                <td>
+                                    <?php echo htmlspecialchars($_SESSION['contacts']['image'], ENT_QUOTES); ?>
                                 </td>
                             </tr>
                             <tr>
