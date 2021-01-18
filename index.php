@@ -175,7 +175,7 @@ if (!empty($_POST)) {
                             <div class="form-group">
                                 <input type="file" name="image" id="image">
                                 <?php if ($error['image'] === 'type'): ?>
-                                    <p class="text-danger">jpg、gif、png以外のファイルは選択できません</p>
+                                    <p class="text-danger">jpg、gif、png、csv以外のファイルは選択できません</p>
                                 <?php endif; ?>
                                 <?php if ($error['image'] === 'size'): ?>
                                     <p class="text-danger">ファイルサイズが大きすぎます。</p>
